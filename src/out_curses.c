@@ -305,36 +305,6 @@ static void draw_details(void)
 		mvaddch(row, (i * DETAILS_COLS - 1), ACS_VLINE);
 }
 
-static void print_message(const char *text)
-{
-	int i, y = (rows/2) - 2;
-	int len = strlen(text);
-	int x = (cols/2) - (len / 2);
-
-	attrset(A_STANDOUT);
-	mvaddch(y - 2, x - 1, ACS_ULCORNER);
-	mvaddch(y + 2, x - 1, ACS_LLCORNER);
-	mvaddch(y - 2, x + len, ACS_URCORNER);
-	mvaddch(y + 2, x + len, ACS_LRCORNER);
-
-	for (i = 0; i < 3; i++) {
-		mvaddch(y - 1 + i, x + len, ACS_VLINE);
-		mvaddch(y - 1 + i, x - 1 ,ACS_VLINE);
-	}
-
-	for (i = 0; i < len; i++) {
-		mvaddch(y - 2, x + i, ACS_HLINE);
-		mvaddch(y - 1, x + i, ' ');
-		mvaddch(y + 1, x + i, ' ');
-		mvaddch(y + 2, x + i, ACS_HLINE);
-	}
-
-	mvaddstr(y, x, text);
-	attroff(A_STANDOUT);
-
-	row = y + 2;
-}
-
 static void draw_help(void)
 {
 #define HW 46
