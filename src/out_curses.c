@@ -1081,9 +1081,7 @@ static void curses_draw(void)
 
 	draw_statusbar();
 
-	if (quit_mode)
-		print_message(" Really Quit? (y/n) ");
-	else if (print_help) {
+	if (print_help) {
 		if (help_page == 0)
 			draw_help();
 #if 0
@@ -1112,25 +1110,11 @@ static int handle_input(int ch)
 	switch (ch) 
 	{
 		case 'q':
-			if (print_help)
-				print_help = 0;
-			else
-				quit_mode = quit_mode ? 0 : 1;
-			return 1;
+			exit(0);
 
 		case 0x1b:
 			quit_mode = 0;
 			print_help = 0;
-			return 1;
-
-		case 'y':
-			if (quit_mode)
-				exit(0);
-			break;
-
-		case 'n':
-			if (quit_mode)
-				quit_mode = 0;
 			return 1;
 
 		case 12:
